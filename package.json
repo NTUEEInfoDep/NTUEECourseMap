@@ -1,10 +1,10 @@
 {
-  "name": "foresry-starter-blog-gatsby",
+  "name": "ntuee-course-map",
   "private": true,
-  "description": "A simple starter blog to get up and developing quickly with Forestry & Gatsby",
+  "description": "A course map for NTUEE students with Gatsby & Notion",
   "license": "MIT",
   "version": "0.1.0",
-  "author": "kendall strautman",
+  "author": "NTUEEInfoDep",
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop -o",
@@ -12,8 +12,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "yarn dev",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "forestry-preview": "gatsby develop -p 8080 -H 0.0.0.0"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
     "gatsby": "^2.23.12",
@@ -25,6 +24,7 @@
     "gatsby-remark-normalize-paths": "^1.0.0",
     "gatsby-remark-relative-images": "^0.3.0",
     "gatsby-source-filesystem": "^2.3.14",
+    "gatsby-source-notion-api": "^0.11.0",
     "gatsby-transformer-remark": "^2.8.20",
     "gatsby-transformer-sharp": "^2.5.7",
     "gatsby-transformer-yaml": "^2.4.6",
@@ -40,10 +40,10 @@
   },
   "keywords": [
     "gatsby",
-    "forestry"
+    "notion"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kendallstrautman/brevifolia-gatsby-forestry"
+    "url": "https://github.com/NTUEEInfoDep/NTUEECourseMap"
   }
 }
