@@ -3,17 +3,38 @@ import Layout from "../components/Layout"
 import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import blogTemplateStyles from "../styles/templates/blog.module.scss"
-//this component handles the blur img & fade-ins
-import Img from "gatsby-image"
+import ReactMarkdown from "react-markdown"
+
+const MarkdownComponents = {
+  p: paragraph => {
+    const { node } = paragraph
+
+    if (node.children[0].tagName === "img") {
+      const image = node.children[0]
+      const metastring = image.properties.alt
+      const alt = metastring?.replace(/ *\{[^)]*\} */g, "")
+      const hasCaption = metastring?.toLowerCase().includes("{caption:")
+      const caption = metastring?.match(/{caption: (.*?)}/)?.pop()
+      console.log(image)
+      return (
+        <div>
+          <img src={image.properties.src} alt={alt} />
+          {hasCaption ? <div aria-label={caption}>{caption}</div> : null}
+        </div>
+      )
+    }
+    return <p>{paragraph.children}</p>
+  },
+}
 
 export default function Blog(props) {
   const data = props.data.markdownRemark
   const allBlogData = useBlogData()
-  const nextSlug = getNextSlug(data.fields.slug)
+  const nextSlug = getNextSlug(data.id)
 
   function getNextSlug(slug) {
     const allSlugs = allBlogData.map(blog => {
-      return blog.node.fields.slug
+      return blog.node.id
     })
     const nextSlug = allSlugs[allSlugs.indexOf(slug) + 1]
     if (nextSlug !== undefined && nextSlug !== "") {
@@ -28,14 +49,15 @@ export default function Blog(props) {
       <article className={blogTemplateStyles.blog}>
         <div className={blogTemplateStyles.blog__info}>
           <h1>{data.frontmatter.title}</h1>
-          <h3>{data.frontmatter.date}</h3>
+          <h3>{data.frontmatter.Date}</h3>
         </div>
-        <div
+        <ReactMarkdown
           className={blogTemplateStyles.blog__body}
-          dangerouslySetInnerHTML={{ __html: data.html }}
-        ></div>
+          components={MarkdownComponents}
+          children={data.rawMarkdownBody}
+        ></ReactMarkdown>
         <div className={blogTemplateStyles.blog__footer}>
-          <h2>Written By: {data.frontmatter.author}</h2>
+          <h2>Written By: {data.frontmatter.Author}</h2>
           <Link
             to={`blog/${nextSlug}`}
             className={blogTemplateStyles.footer__next}
@@ -61,16 +83,13 @@ export default function Blog(props) {
 //$slug is made available by context from createPages call in gatsby-node.js
 export const getPostData = graphql`
   query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      fields {
-        slug
-      }
+    markdownRemark(id: { eq: $slug }) {
       frontmatter {
         title
-        author
-        date(formatString: "MMMM Do, YYYY")
+        Author
+        Date(formatString: "MMMM Do, YYYY")
       }
-      html
+      rawMarkdownBody
     }
   }
 `
