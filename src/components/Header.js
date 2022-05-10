@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import headerStyles from "../styles/components/header.module.scss"
+import * as headerStyles from "../styles/components/header.module.scss"
 
 export default function Header(props) {
   return (

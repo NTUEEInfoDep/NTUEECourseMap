@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/Layout"
 import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
-import blogTemplateStyles from "../styles/templates/blog.module.scss"
+import * as blogTemplateStyles from "../styles/templates/blog.module.scss"
 import ReactMarkdown from "react-markdown"
 
 const MarkdownComponents = {
