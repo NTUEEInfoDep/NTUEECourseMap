@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
+import LimitTags from "./Tag_filter/Tag"
 
 export default function Header(props) {
   return (
@@ -17,6 +18,9 @@ export default function Header(props) {
         <Link to="/">
           <h1>{props.title}</h1>
         </Link>
+        <div>
+          <LimitTags />
+        </div>
         <div>
           <h1>
             <Link
