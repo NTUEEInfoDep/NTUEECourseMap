@@ -9,8 +9,8 @@ export default function Layout(props) {
   return (
     <section
       className={`${layoutStyles.layout} ${
-        props.page === "info" && 
-        layoutStyles.info_page}`}
+        props.page === "info" && layoutStyles.info_page
+      }`}
       style={{
         backgroundColor: props.bgColor,
       }}

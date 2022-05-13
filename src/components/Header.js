@@ -1,12 +1,14 @@
 import React from "react"
+import Drawer from "./Drawer.js"
 import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
 
 export default function Header(props) {
   return (
     <header
-      className={`${headerStyles.header} ${props.page === 'info' &&
-        headerStyles.info_page}`}
+      className={`${headerStyles.header} ${
+        props.page === "info" && headerStyles.info_page
+      }`}
     >
       <nav
         className={headerStyles.header__nav}
@@ -16,19 +18,14 @@ export default function Header(props) {
         <Link to="/">
           <h1>{props.title}</h1>
         </Link>
+        <Drawer />
         <div>
           <h1>
             <Link
-              to={
-                props.page === 'info'
-                  ? "/"
-                  : "/info"
-              }
+              to={props.page === "info" ? "/" : "/info"}
               activeClassName={headerStyles.navItemActive}
             >
-              {props.page === 'info'
-                ? "close"
-                : "info"}
+              {props.page === "info" ? "close" : "info"}
             </Link>
           </h1>
         </div>
