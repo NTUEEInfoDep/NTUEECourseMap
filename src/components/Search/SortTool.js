@@ -17,7 +17,8 @@ export default function SortTool({
         value={sortValue}
         exclusive
         onChange={(event) => {
-          if (sortValue === event.target.value) {
+          console.log(event.target.type)
+          if (sortValue === event.target.value || !event.target.value) {
             setSortOrder(sortOrder === "ascending" ? "descending" : "ascending")
           } else {
             setSortOrder("ascending")
