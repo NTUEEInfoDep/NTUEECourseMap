@@ -10,21 +10,23 @@ const ListItem = styled('li')(({ theme }) => ({
 }));
 
 
-export default function LimitTags() {
+export default function LimitTags(props) {
   return (
+    // 弄一個class做css
     <div>
-      <Autocomplete
+      <Autocomplete  
         multiple
-        id="Teacher"
+        id = {props.name}
+        class = "tagList"
         
         limitTags={1}
-        options={Data}
+        options={props.data}
         size="small"
-        getOptionLabel={(option) => option.title}
-        defaultValue={[Data[0], Data[1]]}
+        getOptionLabel={(option) => option}
+        defaultValue={[]}
         renderInput={(params) => (
-          <TextField {...params} label="Teacher" 
-            placeholder="Teacher" />
+          <TextField {...params} label={props.name} 
+            placeholder={props.name} />
         )}
         sx={{ 
           display: 'flex',
@@ -34,19 +36,9 @@ export default function LimitTags() {
           }}
         onChange={(event, value) => {
           const len = value.length;
-          let stringLen = 0;
-          for (let i = 0; i < len; i++) {
-            const item = value[i];
-            stringLen += item.title.length;
-            if (stringLen > 10) { 
-              let limitSize = i+1;
-              console.log(limitSize);
-              // document.getElementById('Teacher').limitTags={limitSize};
-              break;
-            }
-          }
-          
-
+          console.log(props.name);
+          console.log(len);
+          console.log(value);
         }}
       />
     </div>
@@ -54,11 +46,11 @@ export default function LimitTags() {
 }
 
 const Data = [
-    { key: 0, title: '信號與系統' },
-    { key: 1, title: '交換電路與邏輯設計' },
-    { key: 2, title: '普通物理甲' },
-    { key: 3, title: '電路學' },
-    { key: 4, title: '電磁學' },
+    '信號與系統' ,
+    '交換電路與邏輯設計',
+    '普通物理甲' ,
+    '電路學' ,
+    '電磁學' 
 ];
 
 export  function Tag() { 
@@ -95,34 +87,3 @@ export  function Tag() {
       })}
     </Paper>
 )}
-
-
-// <Paper
-//       sx={{
-//         display: 'flex',
-//         justifyContent: 'center',
-//         flexWrap: 'wrap',
-//         listStyle: 'none',
-//         p: 0.5,
-//         m: 0,
-//       }}
-//       component="ul"
-//     >
-//       {chipData.map((data) => {
-//         let icon;
-
-//         if (data.label === 'React') {
-//           icon = <TagFacesIcon />;
-//         }
-
-//         return (
-//           <ListItem key={data.key}>
-//             <Chip
-//               icon={icon}
-//               label={data.label}
-//               onDelete={data.label === 'React' ? undefined : handleDelete(data)}
-//             />
-//           </ListItem>
-//         );
-//       })}
-//     </Paper>

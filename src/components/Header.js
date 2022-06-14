@@ -19,8 +19,13 @@ export default function Header(props) {
           <h1>{props.title}</h1>
         </Link>
         <div>
-          <LimitTags />
+          <LimitTags name = "Teacher" data={Data}/>
+          <br/>
+          <LimitTags name = "Course" data={Data}/>
+          <br/>
+          <LimitTags name = "Semester" data={Data}/>
         </div>
+
         <div>
           <h1>
             <Link
@@ -35,3 +40,11 @@ export default function Header(props) {
     </header>
   )
 }
+
+const Data = [
+  '信號與系統' ,
+  '交換電路與邏輯設計',
+  '普通物理甲' ,
+  '電路學' ,
+  '電磁學' 
+];
