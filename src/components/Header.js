@@ -9,6 +9,7 @@ export default function Header(props) {
         props.page === "info" && headerStyles.info_page
       }`}
     >
+      
       <nav
         className={headerStyles.header__nav}
         role="navigation"
