@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
+import Sort_list from "./sort_list"
 
 export default function Header(props) {
   return (
@@ -18,7 +19,7 @@ export default function Header(props) {
         <Link to="/">
           <h1>{props.title}</h1>
         </Link>
-
+        <Sort_list/>
         <div>
           <h1>
             <Link
