@@ -4,6 +4,7 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import * as tagStyles from "../../styles/components/tag.module.scss"
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -17,7 +18,7 @@ export default function LimitTags(props) {
       <Autocomplete  
         multiple
         id = {props.name}
-        class = "tagList"
+        class = {`${tagStyles.tagList} `}
         
         limitTags={1}
         options={props.data}
@@ -25,14 +26,15 @@ export default function LimitTags(props) {
         getOptionLabel={(option) => option}
         defaultValue={[]}
         renderInput={(params) => (
-          <TextField {...params} label={props.name} 
-            placeholder={props.name} />
+          <TextField {...params} label={props.name} />
+            // placeholder={props.name} />
         )}
         sx={{ 
           display: 'flex',
           justifyContent: 'center',
           flexWrap: 'unwrap',
-          width : `${window.innerWidth*0.85*0.3}px` ,
+          // width : `${window.innerWidth*0.85*0.3}px` ,
+          // gap:2,
           }}
         onChange={(event, value) => {
           const len = value.length;
@@ -65,7 +67,7 @@ export  function Tag() {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         listStyle: 'none',
         p: 0.5,
         m: 0,

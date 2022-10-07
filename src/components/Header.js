@@ -18,7 +18,7 @@ export default function Header(props) {
         <Link to="/">
           <h1>{props.title}</h1>
         </Link>
-        <div>
+        <div className={headerStyles.header__tagList}>
           <LimitTags name = "Teacher" data={Data}/>
           <br/>
           <LimitTags name = "Course" data={Data}/>

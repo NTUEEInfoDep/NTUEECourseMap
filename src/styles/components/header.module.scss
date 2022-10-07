@@ -15,7 +15,17 @@
     margin-bottom: 0;
   }
 }
+.header__tagList{
+  // padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  // padding-bottom: 2rem;
 
+  border-right: 5px;
+  border-left: 5px;
+  border-bottom: none;
+  margin: 0;
+}
 @media (min-width: 768px) {
   .header {
     height: 100vh;
@@ -35,5 +45,16 @@
     img {
       margin-bottom: 0;
     }
+  }
+  .header__tagList{
+    padding-left: 0rem;
+    padding-top: 2rem;
+    padding-right: 0rem;
+    padding-bottom: 2rem;
+
+    border-right: 5px;
+    border-left: 5px;
+    border-bottom: none;
+    margin: 0;
   }
 }
