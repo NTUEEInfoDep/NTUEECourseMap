@@ -9,24 +9,6 @@ import { ThemeProvider } from "@mui/material/styles"
 export default function Layout(props) {
   const { title, description } = useSiteMetadata()
   return (
-<<<<<<< HEAD
-    <section
-      className={`${layoutStyles.layout} ${
-        props.page === "info" && layoutStyles.info_page
-      }`}
-      style={{
-        backgroundColor: props.bgColor,
-      }}
-    >
-      <Helmet>
-        <html lang="en" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Helmet>
-      <Header page={props.page} title={title} />
-      <div className={layoutStyles.content}>{props.children}</div>
-    </section>
-=======
     <ThemeProvider theme={theme}>
       <section
         className={`${layoutStyles.layout} ${
@@ -45,6 +27,5 @@ export default function Layout(props) {
         <div className={layoutStyles.content}>{props.children}</div>
       </section>
     </ThemeProvider>
->>>>>>> upstream/main
   )
 }
