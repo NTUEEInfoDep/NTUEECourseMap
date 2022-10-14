@@ -37,6 +37,7 @@
     justify-content: center;
     padding: 1.5rem 1.25rem;
     border-bottom: 1px solid #ebebeb;
+    display: flex;
     flex-direction: row;
   }
 
@@ -64,7 +65,6 @@
   }
   
   .list__rating{
-    right: 0;
     bottom: 0;
     position: absolute;
   }
