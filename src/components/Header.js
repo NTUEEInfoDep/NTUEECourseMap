@@ -1,5 +1,4 @@
 import React from "react"
-import Drawer from "./Drawer.js"
 import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
 
@@ -18,7 +17,6 @@ export default function Header(props) {
         <Link to="/">
           <h1>{props.title}</h1>
         </Link>
-        <Drawer />
         <div>
           <h1>
             <Link
