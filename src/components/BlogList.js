@@ -16,7 +16,9 @@ export default function BlogList() {
               <Link to={`/blog/${blog.node.id}`} key={blog.node.id}>
                 <li className={blogListStyles.li} key={blog.node.id}>
                   <div className={blogListStyles.list__hero}>
-                    <Img alt={blog.node.frontmatter.title} />
+                    
+                    <img src={blog.node.frontmatter.Img[0]?blog.node.frontmatter.Img[0].file.url:null} />
+                    
                   </div>
                   <div className={blogListStyles.list__info}>
                     <h2>{blog.node.frontmatter.title}</h2>
