@@ -11,6 +11,11 @@ export default function useBlogData() {
               Date(formatString: "MMMM Do, YYYY")
               Author
               title
+              Img{
+                file{
+                  url
+                }
+              }
             }
             rawMarkdownBody
           }
