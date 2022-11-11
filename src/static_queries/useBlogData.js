@@ -11,7 +11,7 @@ export default function useBlogData() {
               Date(formatString: "MMMM Do, YYYY")
               Author
               title
-              Img{
+              Files___media{
                 file{
                   url
                 }
