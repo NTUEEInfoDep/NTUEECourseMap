@@ -21,11 +21,16 @@ import MailIcon from "@mui/icons-material/Mail"
 import InputAdornment from "@mui/material/InputAdornment"
 
 import TextField from "@mui/material/TextField"
+import Button from "@mui/material/Button"
 
 import SearchIcon from "@mui/icons-material/Search"
 import { margin } from "@mui/system"
 import { BorderAllOutlined, Translate } from "@mui/icons-material"
 import { Input } from "@mui/material"
+
+import { useState } from "react"
+import SearchTags from "./Tags"
+import SortTool from "./SortTool"
 
 const drawerWidth = 350
 
@@ -56,10 +61,30 @@ const drawerWidth = 350
 //   ...theme.mixins.toolbar,
 //   justifyContent: "flex-end",
 // }))
+const sortList = [
+  {
+    value: "date",
+    label: "時間",
+  },
+  {
+    value: "score",
+    label: "評分",
+  },
+  {
+    value: "semester",
+    label: "學期",
+  },
+  {
+    value: "like",
+    label: "推文數",
+  },
+]
 
 export default function DrawerLeft() {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
+  const [sortValue, setSortValue] = useState("date")
+  const [sortOrder, setSortOrder] = useState("ascending")
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -77,7 +102,7 @@ export default function DrawerLeft() {
         // edge="start"
         onClick={open ? handleDrawerClose : handleDrawerOpen}
         sx={{
-          position: "absolute",
+          position: "fixed",
           top: "50%",
           left: open ? drawerWidth + 10 : 10,
           transform: "translate(0, -50%)",
@@ -110,10 +135,23 @@ export default function DrawerLeft() {
         >
           <Box
             sx={{
+              fontSize: "30px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "10px",
+              margin: "20px 0px 20px 0px",
+            }}
+          >
+            Search Tools
+          </Box>
+          <Divider />
+          {/* Search text */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "30px",
             }}
           >
             <TextField
@@ -130,17 +168,76 @@ export default function DrawerLeft() {
               variant="outlined"
             />
           </Box>
-          {/* <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader> */}
-          {/* <Divider /> */}
-          <List>
+
+          {/* Search Tags */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "10px",
+            }}
+          >
+            <SearchTags />
+          </Box>
+
+          <Divider />
+
+          {/* Sort Tools */}
+          <Box
+            sx={{
+              margin: "30px 0px 30px 0px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <SortTool
+              sortList={sortList}
+              sortValue={sortValue}
+              setSortValue={setSortValue}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+          </Box>
+
+          <Divider />
+
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              margin: "30px 0px 30px 0px",
+              paddingLeft: "5%",
+              paddingRight: "5%",
+            }}
+          >
+            <Button
+              sx={{
+                textTransform: "none",
+                width: "40%",
+                border: "1px solid gray",
+                font: "inherit",
+              }}
+            >
+              Apply
+            </Button>
+            <Button
+              sx={{
+                textTransform: "none",
+                width: "40%",
+                border: "1px solid gray",
+                font: "inherit",
+              }}
+            >
+              Clear All
+            </Button>
+          </Box>
+          {/* <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -165,7 +262,7 @@ export default function DrawerLeft() {
                 </ListItemButton>
               </ListItem>
             ))}
-          </List>
+          </List> */}
         </Drawer>
       </Box>
     </React.Fragment>

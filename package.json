@@ -37,6 +37,7 @@
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.3",
+    "styled-components": "^5.3.6",
     "typescript": "^4.6.4",
     "webpack": "^5.72.0"
   },
