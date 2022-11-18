@@ -17,8 +17,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.0",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
     "gatsby": "^4.13.1",
     "gatsby-image": "^2.4.9",
     "gatsby-plugin-react-helmet": "^5.13.0",
@@ -32,10 +32,12 @@
     "gatsby-transformer-remark": "^5.13.0",
     "gatsby-transformer-sharp": "^4.13.0",
     "gatsby-transformer-yaml": "^4.13.0",
+    "material-ui-search-bar": "^1.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.3",
+    "styled-components": "^5.3.6",
     "typescript": "^4.6.4",
     "webpack": "^5.72.0"
   },

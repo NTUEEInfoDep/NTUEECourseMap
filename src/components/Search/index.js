@@ -8,6 +8,8 @@ import { styled } from "@mui/material/styles"
 
 // components
 import SortTool from "./SortTool"
+import Drawer from "./Drawer.js"
+import SearchTags from "./Tags"
 
 const sortList = [
   {
@@ -53,7 +55,8 @@ export default function Search() {
 
   return (
     <React.Fragment key="search">
-      <SearchButton onClick={handleOpenSearch}>
+      <Drawer />
+      {/* <SearchButton onClick={handleOpenSearch}>
         <SearchIcon sx={{ fontSize: "30px", color: "#ffffff" }} />
       </SearchButton>
       <SwipeableDrawer
@@ -68,7 +71,7 @@ export default function Search() {
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
         />
-      </SwipeableDrawer>
+      </SwipeableDrawer> */}
     </React.Fragment>
   )
 }
