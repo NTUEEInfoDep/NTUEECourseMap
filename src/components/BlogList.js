@@ -26,14 +26,15 @@ export default function BlogList() {
           .map((blog) => {
             return (
               <Link to={`/blog/${blog.node.id}`} key={blog.node.id}>
-                <li className={blogListStyles.li} key={blog.node.id}>
+                <li className={blogListStyles.list} key={blog.node.id}>
                   <div className={blogListStyles.list__hero}>
                     <img
                       src={
                         blog.node.frontmatter.Files___media[0]
                           ? blog.node.frontmatter.Files___media[0].file.url
-                          : null
+                          : DefaultImage
                       }
+                      alt=""
                     />
                   </div>
                   <div className={blogListStyles.list__info}>
@@ -42,16 +43,16 @@ export default function BlogList() {
                       <h3>{blog.node.frontmatter.Date}</h3>
                       <p>{blog.node.excerpt}</p>
                     </div>
-                    
+
                     <div className={blogListStyles.list__addition}>
                       <h3>author</h3>
                       <h3>{blog.node.frontmatter.Author}</h3>
                       <div className={blogListStyles.list__rating}>
-                        <StarRateIcon/>
-                        <StarRateIcon/>
-                        <StarRateIcon/>
-                        <StarBorderIcon/>
-                        <StarBorderIcon/>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarBorderIcon />
+                        <StarBorderIcon />
                       </div>
                     </div>
                   </div>
