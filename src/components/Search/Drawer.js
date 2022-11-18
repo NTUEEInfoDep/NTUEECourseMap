@@ -27,7 +27,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import { margin } from "@mui/system"
 import { BorderAllOutlined, Translate } from "@mui/icons-material"
 import { Input } from "@mui/material"
-
+import Searchbar from "./Searchbar"
 import { useState } from "react"
 import SearchTags from "./Tags"
 import SortTool from "./SortTool"
@@ -80,7 +80,7 @@ const sortList = [
   },
 ]
 
-export default function DrawerLeft() {
+export default function DrawerLeft(props) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   const [sortValue, setSortValue] = useState("date")
@@ -154,7 +154,7 @@ export default function DrawerLeft() {
               marginTop: "30px",
             }}
           >
-            <TextField
+            {/*<TextField
               id="input-with-icon-textfield"
               // label="TextField"
               placeholder="Search course..."
@@ -166,7 +166,8 @@ export default function DrawerLeft() {
                 ),
               }}
               variant="outlined"
-            />
+            />*/}
+            <Searchbar inputKeyword={props.inputKeyword} />
           </Box>
 
           {/* Search Tags */}
