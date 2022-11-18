@@ -41,7 +41,7 @@ const SearchButton = styled(Button)({
   borderRadius: "0% 10% 10% 0%",
 })
 
-export default function Search() {
+export default function Search(props) {
   const [openSearch, setOpenSearch] = useState(false)
   const [sortValue, setSortValue] = useState("date")
   const [sortOrder, setSortOrder] = useState("ascending")
@@ -55,7 +55,7 @@ export default function Search() {
 
   return (
     <React.Fragment key="search">
-      <Drawer />
+      <Drawer inputKeyword={props.inputKeyword} />
       {/* <SearchButton onClick={handleOpenSearch}>
         <SearchIcon sx={{ fontSize: "30px", color: "#ffffff" }} />
       </SearchButton>
