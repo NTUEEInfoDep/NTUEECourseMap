@@ -38,23 +38,9 @@ export default function BlogList() {
                     />
                   </div>
                   <div className={blogListStyles.list__info}>
-                    <div className={blogListStyles.list__base}>
-                      <h2>{blog.node.frontmatter.title}</h2>
-                      <h3>{blog.node.frontmatter.Date}</h3>
-                      <p>{blog.node.excerpt}</p>
-                    </div>
-
-                    <div className={blogListStyles.list__addition}>
-                      <h3>author</h3>
-                      <h3>{blog.node.frontmatter.Author}</h3>
-                      <div className={blogListStyles.list__rating}>
-                        <StarRateIcon />
-                        <StarRateIcon />
-                        <StarRateIcon />
-                        <StarBorderIcon />
-                        <StarBorderIcon />
-                      </div>
-                    </div>
+                    <h2>{blog.node.frontmatter.title}</h2>
+                    <h3>{blog.node.frontmatter.Date}</h3>
+                    <p>{blog.node.excerpt}</p>
                   </div>
                 </li>
               </Link>
