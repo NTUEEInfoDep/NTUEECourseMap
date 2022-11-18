@@ -4,6 +4,9 @@ import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogTemplateStyles from "../styles/templates/blog.module.scss"
 import ReactMarkdown from "react-markdown"
+import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+
 
 const MarkdownComponents = {
   p: paragraph => {
@@ -25,6 +28,26 @@ const MarkdownComponents = {
     }
     return <p>{paragraph.children}</p>
   },
+}
+
+function showStars(n) {
+  return (<h3>{[1,2,3,4,5].map((i) => {
+    if(i <= n)
+      return (<StarRoundedIcon style={{margin: -2}} color="yellow"/>)
+    else
+      return (<StarBorderRoundedIcon style={{margin: -2}}/>)
+  })}</h3>)
+}
+
+function showSelectionMethod(n) {
+  if (n == '1')
+    return '（不限人數，直接上網加選）' 
+  else if (n == '2')
+    return '（向教師取得授權碼後加選）' 
+  else if (n == '3')
+    return '（有人數限制，上網登記後分發）' 
+  else
+    return '（錯誤）' 
 }
 
 export default function Blog(props) {
@@ -49,7 +72,41 @@ export default function Blog(props) {
       <article className={blogTemplateStyles.blog}>
         <div className={blogTemplateStyles.blog__info}>
           <h1>{data.frontmatter.title}</h1>
-          <h3>{data.frontmatter.Date}</h3>
+          <h3>{data.frontmatter.Semester}</h3>
+          {showStars(+data.frontmatter.Star)}
+          <br></br>
+
+          <table>
+            <tr>
+              <th>授課教師</th>
+              <td>{data.frontmatter.Instructor}</td>
+              <th>撰文者</th>
+              <td>{data.frontmatter.Author}</td>
+            </tr>
+            <tr>
+              <th>類型</th>
+              <td>{data.frontmatter.CourseType}</td>
+            </tr>
+            <tr>
+              <th>學分</th>
+              <td>{data.frontmatter.Credits}</td>
+            </tr>
+            <tr>
+              <th>系所</th>
+              <td>{data.frontmatter.Department}</td>
+            </tr>
+            <tr>
+              <th>加選方式</th>
+              <td>{data.frontmatter.SelectionMethod}{showSelectionMethod(data.frontmatter.SelectionMethod)}</td>
+              
+            </tr>
+          </table>
+
+          {/* <h3>授課教師：{data.frontmatter.Instructor}</h3>
+          <h3>類型：{data.frontmatter.CourseType}</h3>
+          <h3>學分：{data.frontmatter.Credits}</h3>
+          <h3>系所：{data.frontmatter.Department}</h3>
+          <h3>加選方式：{data.frontmatter.SelectionMethod}</h3> */}
         </div>
         <ReactMarkdown
           className={blogTemplateStyles.blog__body}
@@ -57,7 +114,7 @@ export default function Blog(props) {
           children={data.rawMarkdownBody}
         ></ReactMarkdown>
         <div className={blogTemplateStyles.blog__footer}>
-          <h2>Written By: {data.frontmatter.Author}</h2>
+          <h2>本文由{data.frontmatter.Author}撰寫</h2>
           <Link
             to={`blog/${nextSlug}`}
             className={blogTemplateStyles.footer__next}
@@ -88,6 +145,13 @@ export const getPostData = graphql`
         title
         Author
         Date(formatString: "MMMM Do, YYYY")
+        Instructor
+        CourseType
+        Credits
+        Department
+        SelectionMethod
+        Semester
+        Star
       }
       rawMarkdownBody
     }

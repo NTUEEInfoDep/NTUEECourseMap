@@ -22,9 +22,11 @@
   margin: 0 auto;
   h1 {
     margin-bottom: 0.66rem;
+    text-align: left;
   }
   h3 {
     margin-bottom: 0;
+    text-align: left;
   }
 }
 
@@ -90,7 +92,7 @@
     max-width: 800px;
     padding: 0 2rem;
     h1, h2, h3, h4, h5, h6 {
-      padding: 1.5rem;
+      padding: 2rem;
     }
     span {
       width: 100%;
@@ -109,11 +111,11 @@
     }
   }
   .blog__info {
-    text-align: center;
-    padding: 2rem 0;
+    max-width: 800px;
+    padding: 2rem 2rem;
     h1 {
       max-width: 500px;
-      margin: 0 auto 0.66rem auto;
+      // margin: 0 auto 0.66rem auto;
     }
   }
   .blog__footer {
@@ -126,7 +128,7 @@
     height: 70vh;
   }
   .blog__info {
-    padding: 3rem 0;
+    padding: 2rem 2rem;
   }
   .blog__footer {
     padding: 2rem 2rem 3rem 2rem;
