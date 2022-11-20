@@ -71,6 +71,11 @@ p {
   color: #464646;
 }
 
+table, th, td {
+  border: none;
+  line-height: 15px;
+}
+
 table {
   width : 100%;
 }
@@ -78,6 +83,10 @@ table {
 th {
   width : 18%;
 }
+
+// tr {
+//   height : 0px;
+// }
 
 // gatsby-image plugin container-----------------
 

@@ -47,7 +47,7 @@ function showSelectionMethod(n) {
   else if (n == '3')
     return '（有人數限制，上網登記後分發）' 
   else
-    return '（錯誤）' 
+    return '' 
 }
 
 export default function Blog(props) {
@@ -80,8 +80,6 @@ export default function Blog(props) {
             <tr>
               <th>授課教師</th>
               <td>{data.frontmatter.Instructor}</td>
-              <th>撰文者</th>
-              <td>{data.frontmatter.Author}</td>
             </tr>
             <tr>
               <th>類型</th>
@@ -98,15 +96,18 @@ export default function Blog(props) {
             <tr>
               <th>加選方式</th>
               <td>{data.frontmatter.SelectionMethod}{showSelectionMethod(data.frontmatter.SelectionMethod)}</td>
-              
             </tr>
           </table>
 
-          {/* <h3>授課教師：{data.frontmatter.Instructor}</h3>
-          <h3>類型：{data.frontmatter.CourseType}</h3>
-          <h3>學分：{data.frontmatter.Credits}</h3>
-          <h3>系所：{data.frontmatter.Department}</h3>
-          <h3>加選方式：{data.frontmatter.SelectionMethod}</h3> */}
+          <hr></hr>
+
+          <table>
+            <tr>
+              <th>撰文者</th>
+              <td>{data.frontmatter.Author}</td>
+            </tr>
+          </table>
+
         </div>
         <ReactMarkdown
           className={blogTemplateStyles.blog__body}
