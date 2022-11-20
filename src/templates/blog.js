@@ -33,7 +33,7 @@ const MarkdownComponents = {
 function showStars(n) {
   return (<h3>{[1,2,3,4,5].map((i) => {
     if(i <= n)
-      return (<StarRoundedIcon style={{margin: -2}} color="yellow"/>)
+      return (<StarRoundedIcon style={{margin: -2}} sx={{color: "#FFBF00"}}/>)
     else
       return (<StarBorderRoundedIcon style={{margin: -2}}/>)
   })}</h3>)
@@ -72,7 +72,7 @@ export default function Blog(props) {
       <article className={blogTemplateStyles.blog}>
         <div className={blogTemplateStyles.blog__info}>
           <h1>{data.frontmatter.title}</h1>
-          <h3>{data.frontmatter.Semester}</h3>
+          <h3 className={blogTemplateStyles.semester}>{data.frontmatter.Semester}</h3>
           {showStars(+data.frontmatter.Star)}
           <br></br>
 
