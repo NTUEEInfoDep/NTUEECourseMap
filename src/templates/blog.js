@@ -40,11 +40,11 @@ function showStars(n) {
 }
 
 function showSelectionMethod(n) {
-  if (n == '1')
+  if (n === '1')
     return '（不限人數，直接上網加選）' 
-  else if (n == '2')
+  else if (n === '2')
     return '（向教師取得授權碼後加選）' 
-  else if (n == '3')
+  else if (n === '3')
     return '（有人數限制，上網登記後分發）' 
   else
     return '' 
@@ -109,13 +109,15 @@ export default function Blog(props) {
           </table>
 
         </div>
+
         <ReactMarkdown
           className={blogTemplateStyles.blog__body}
           components={MarkdownComponents}
           children={data.rawMarkdownBody}
         ></ReactMarkdown>
+
         <div className={blogTemplateStyles.blog__footer}>
-          <h2>本文由{data.frontmatter.Author}撰寫</h2>
+          <h2>本文由 {data.frontmatter.Author} 撰寫</h2>
           <Link
             to={`blog/${nextSlug}`}
             className={blogTemplateStyles.footer__next}
