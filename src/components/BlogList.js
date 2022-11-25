@@ -7,7 +7,7 @@ import { useSearch } from "./hooks/useSearch"
 
 export default function BlogList() {
   const blogData = useBlogData()
-  const { searchText, searchTags } = useSearch()
+  //const { searchText, searchTags } = useSearch()
 
   const CountingStars = (rating) => {
     if (rating === '1'){return <h2>★☆☆☆☆</h2>}
@@ -23,6 +23,8 @@ export default function BlogList() {
         {blogData
           .filter((blog) => {
             return (
+              0
+              /*
               blog.node.frontmatter.title !== "" &&
               blog.node.frontmatter.title.includes(searchText) &&
               blog.node.frontmatter.Instructor !== "" &&
@@ -30,6 +32,7 @@ export default function BlogList() {
                 searchTags["Professor"].some((Professor) =>
                   blog.node.frontmatter.Instructor.includes(Professor)
                 ))
+              */
             )
           })
           .map((blog) => {
@@ -54,8 +57,9 @@ export default function BlogList() {
                             <h3 className={blogListStyles.instructor}>{blog.node.frontmatter.Instructor}</h3>
                           </div>
                           <div className={blogListStyles.addtion}>
-                            <h3 className={blogListStyles.text__addtion}>Course Type : {blog.node.frontmatter.CourseType}</h3>
-                            <h3 className={blogListStyles.text__addtion}>Credits : {blog.node.frontmatter.Credits}</h3>
+                            <h3 className={blogListStyles.text__rightPart}>貼文日期 : {blog.node.frontmatter.Date}</h3>
+                            <h3 className={blogListStyles.text__addtion}>課程類型 : {blog.node.frontmatter.CourseType}</h3>
+                            <h3 className={blogListStyles.text__addtion}>學分數 : {blog.node.frontmatter.Credits}</h3>
                           </div>
                         </div>
                         <p className={blogListStyles.detail}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aliquam culpa quod a molestias nobis maiores temp</p>
