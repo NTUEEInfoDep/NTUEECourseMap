@@ -43,8 +43,6 @@ export default function BlogList() {
                       <h3>{blog.node.frontmatter.Date}</h3>
                       <p>{blog.node.excerpt}</p>
                     </div>
-                    
-                    
                   </div>
                 </li>
               </Link>
