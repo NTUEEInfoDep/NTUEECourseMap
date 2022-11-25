@@ -66,7 +66,6 @@ export default function BlogList() {
                       </div>
                       <div className={blogListStyles.rightPart}>
                         <h3 className={blogListStyles.text__rightPart}>{blog.node.frontmatter.Author}</h3>
-                        <h3 className={blogListStyles.text__rightPart}>{blog.node.frontmatter.Date}</h3>
                         <br /><br /><br /><br />
                         <div className={blogListStyles.star}>{CountingStars(blog.node.frontmatter.Star)}</div>
                       </div>
