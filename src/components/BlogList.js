@@ -10,11 +10,11 @@ export default function BlogList() {
   const { searchText, searchTags } = useSearch()
 
   const CountingStars = (rating) => {
-    if (rating === '1'){return <h1>★☆☆☆☆</h1>}
-    else if (rating === '2'){return <h1>★★☆☆☆</h1>}
-    else if (rating === '3'){return <h1>★★★☆☆</h1>}
-    else if (rating === '4'){return <h1>★★★★☆</h1>}
-    else {return <h1>★★★★★</h1>}
+    if (rating === '1'){return <h2>★☆☆☆☆</h2>}
+    else if (rating === '2'){return <h2>★★☆☆☆</h2>}
+    else if (rating === '3'){return <h2>★★★☆☆</h2>}
+    else if (rating === '4'){return <h2>★★★★☆</h2>}
+    else {return <h2>★★★★★</h2>}
   }
 
   function renderBlogData() {
@@ -51,7 +51,7 @@ export default function BlogList() {
                         <div className={blogListStyles.flex__addtion}>
                           <div className={blogListStyles.main__info}>
                             <h2 className={blogListStyles.title}>{blog.node.frontmatter.Semester} {blog.node.frontmatter.title}</h2>
-                            <h3>{blog.node.frontmatter.Instructor}</h3>
+                            <h3 className={blogListStyles.instructor}>{blog.node.frontmatter.Instructor}</h3>
                           </div>
                           <div className={blogListStyles.addtion}>
                             <h3 className={blogListStyles.text__addtion}>Course Type : {blog.node.frontmatter.CourseType}</h3>
@@ -64,9 +64,8 @@ export default function BlogList() {
                       <div className={blogListStyles.rightPart}>
                         <h3 className={blogListStyles.text__rightPart}>{blog.node.frontmatter.Author}</h3>
                         <h3 className={blogListStyles.text__rightPart}>{blog.node.frontmatter.Date}</h3>
-                        <div>
-                          {CountingStars(blog.node.frontmatter.Star)}
-                        </div>
+                        <br /><br /><br /><br />
+                        <div className={blogListStyles.star}>{CountingStars(blog.node.frontmatter.Star)}</div>
                       </div>
                     </div>
                   </div>
