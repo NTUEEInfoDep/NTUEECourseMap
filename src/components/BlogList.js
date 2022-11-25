@@ -7,7 +7,7 @@ import { useSearch } from "./hooks/useSearch"
 
 export default function BlogList() {
   const blogData = useBlogData()
-  //const { searchText, searchTags } = useSearch()
+  const { searchText, searchTags } = useSearch()
 
   const CountingStars = (rating) => {
     if (rating === '1'){return <h2>★☆☆☆☆</h2>}
