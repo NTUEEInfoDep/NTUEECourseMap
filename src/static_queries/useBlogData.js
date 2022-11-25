@@ -9,12 +9,13 @@ export default function useBlogData() {
             id
             frontmatter {
               Date(formatString: "MMMM Do, YYYY")
+              Star
+              CourseType
+              Author
+              title
               Instructor
               Semester
               CourseTitle
-              Star
-              CourseType
-              Credits
               Files___media{
                 file{
                   url
