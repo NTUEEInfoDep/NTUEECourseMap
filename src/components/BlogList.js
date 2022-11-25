@@ -23,8 +23,6 @@ export default function BlogList() {
         {blogData
           .filter((blog) => {
             return (
-              0
-              /*
               blog.node.frontmatter.title !== "" &&
               blog.node.frontmatter.title.includes(searchText) &&
               blog.node.frontmatter.Instructor !== "" &&
@@ -32,7 +30,6 @@ export default function BlogList() {
                 searchTags["Professor"].some((Professor) =>
                   blog.node.frontmatter.Instructor.includes(Professor)
                 ))
-              */
             )
           })
           .map((blog) => {
