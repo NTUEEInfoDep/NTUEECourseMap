@@ -6,6 +6,7 @@ import Img from "gatsby-image"
 
 export default function BlogList() {
   const blogData = useBlogData()
+  const { searchText, searchTags } = useSearch()
 
   const CountingStars = (rating) => {
     if (rating === '1'){return <h2>★☆☆☆☆</h2>}
@@ -14,8 +15,6 @@ export default function BlogList() {
     else if (rating === '4'){return <h2>★★★★☆</h2>}
     else {return <h2>★★★★★</h2>}
   }
-
-  const { searchText, searchTags } = useSearch()
 
   function renderBlogData() {
     return (
