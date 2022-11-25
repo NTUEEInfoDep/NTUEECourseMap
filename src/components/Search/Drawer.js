@@ -2,35 +2,36 @@ import * as React from "react"
 import { styled, useTheme } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
-import MuiAppBar from "@mui/material/AppBar"
-import Toolbar from "@mui/material/Toolbar"
-import CssBaseline from "@mui/material/CssBaseline"
-import List from "@mui/material/List"
-import Typography from "@mui/material/Typography"
 import Divider from "@mui/material/Divider"
 import IconButton from "@mui/material/IconButton"
-import MenuIcon from "@mui/icons-material/Menu"
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import ChevronRightIcon from "@mui/icons-material/ChevronRight"
-import ListItem from "@mui/material/ListItem"
-import ListItemButton from "@mui/material/ListItemButton"
-import ListItemIcon from "@mui/material/ListItemIcon"
-import ListItemText from "@mui/material/ListItemText"
-import InboxIcon from "@mui/icons-material/MoveToInbox"
-import MailIcon from "@mui/icons-material/Mail"
-import InputAdornment from "@mui/material/InputAdornment"
-
-import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
-
 import SearchIcon from "@mui/icons-material/Search"
-import { margin } from "@mui/system"
-import { BorderAllOutlined, Translate } from "@mui/icons-material"
-import { Input } from "@mui/material"
+// import MuiAppBar from "@mui/material/AppBar"
+// import Toolbar from "@mui/material/Toolbar"
+// import CssBaseline from "@mui/material/CssBaseline"
+// import List from "@mui/material/List"
+// import Typography from "@mui/material/Typography"
+// import MenuIcon from "@mui/icons-material/Menu"
+// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
+// import ChevronRightIcon from "@mui/icons-material/ChevronRight"
+// import ListItem from "@mui/material/ListItem"
+// import ListItemButton from "@mui/material/ListItemButton"
+// import ListItemIcon from "@mui/material/ListItemIcon"
+// import ListItemText from "@mui/material/ListItemText"
+// import InboxIcon from "@mui/icons-material/MoveToInbox"
+// import MailIcon from "@mui/icons-material/Mail"
+// import InputAdornment from "@mui/material/InputAdornment"
+
+// import TextField from "@mui/material/TextField"
+
+// import { margin } from "@mui/system"
+// import { BorderAllOutlined, Translate } from "@mui/icons-material"
+// import { Input } from "@mui/material"
 import Searchbar from "./Searchbar"
 import { useState } from "react"
 import SearchTags from "./Tags"
 import SortTool from "./SortTool"
+import { useSearch } from "../hooks/useSearch"
 
 const drawerWidth = 350
 
@@ -86,12 +87,44 @@ export default function DrawerLeft(props) {
   const [sortValue, setSortValue] = useState("date")
   const [sortOrder, setSortOrder] = useState("ascending")
 
+  const [localSearchText, setLocalSearchText] = useState("")
+  const { searchText, updateSearchText } = useSearch()
+
+  const [ProfSearchTags, setProfSearchTags] = useState([])
+  const [CourseSearchTags, setCourseSearchTags] = useState([])
+  const [SemesterSearchTags, setSemesterSearchTags] = useState([])
+  const { searchTags, updateSearchTags } = useSearch()
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  const handleApply = () => {
+    updateSearchText(localSearchText)
+
+    updateSearchTags("Professor", ProfSearchTags)
+    updateSearchTags("Course", CourseSearchTags)
+    updateSearchTags("Semester", SemesterSearchTags)
+  }
+
+  const handleClear = () => {
+    updateSearchText("")
+    setLocalSearchText("")
+
+    updateSearchTags("Clear", [])
+    setProfSearchTags([])
+    setCourseSearchTags([])
+    setSemesterSearchTags([])
+  }
+
+  const handleSearchText = (event) => {
+    if (event.code === "Enter") {
+      updateSearchText(localSearchText)
+    }
   }
 
   return (
@@ -154,20 +187,11 @@ export default function DrawerLeft(props) {
               marginTop: "30px",
             }}
           >
-            {/*<TextField
-              id="input-with-icon-textfield"
-              // label="TextField"
-              placeholder="Search course..."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              variant="outlined"
-            />*/}
-            <Searchbar inputKeyword={props.inputKeyword} />
+            <Searchbar
+              localSearchText={localSearchText}
+              setLocalSearchText={setLocalSearchText}
+              handleChange={handleSearchText}
+            />
           </Box>
 
           {/* Search Tags */}
@@ -180,7 +204,14 @@ export default function DrawerLeft(props) {
               marginTop: "10px",
             }}
           >
-            <SearchTags />
+            <SearchTags
+              ProfSearchTags={ProfSearchTags}
+              CourseSearchTags={CourseSearchTags}
+              SemesterSearchTags={SemesterSearchTags}
+              setProfSearchTags={setProfSearchTags}
+              setCourseSearchTags={setCourseSearchTags}
+              setSemesterSearchTags={setSemesterSearchTags}
+            />
           </Box>
 
           <Divider />
@@ -224,6 +255,7 @@ export default function DrawerLeft(props) {
                 border: "1px solid gray",
                 font: "inherit",
               }}
+              onClick={handleApply}
             >
               Apply
             </Button>
@@ -234,36 +266,11 @@ export default function DrawerLeft(props) {
                 border: "1px solid gray",
                 font: "inherit",
               }}
+              onClick={handleClear}
             >
               Clear All
             </Button>
           </Box>
-          {/* <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
         </Drawer>
       </Box>
     </React.Fragment>

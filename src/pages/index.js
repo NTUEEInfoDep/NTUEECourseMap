@@ -1,16 +1,18 @@
-import React, { useState } from "react"
+import React from "react"
 import Layout from "../components/Layout"
 import BlogList from "../components/BlogList"
 import Search from "../components/Search"
+import { SearchProvider } from "../components/hooks/useSearch"
 
 export default function IndexPage() {
-  const [keyword, setKeyword] = useState("")
   return (
     <Layout page="home" bgColor="inherit">
-      <Search inputKeyword={setKeyword} />
-      <section>
-        <BlogList keyword={keyword} />
-      </section>
+      <SearchProvider>
+        <Search />
+        <section>
+          <BlogList />
+        </section>
+      </SearchProvider>
     </Layout>
   )
 }
