@@ -18,8 +18,6 @@ export default function BlogList() {
     else {return <h2>★★★★★</h2>}
   }
 
-  const { searchText, searchTags } = useSearch()
-
   function renderBlogData() {
     return (
       <div>
