@@ -2,19 +2,27 @@ import React from "react"
 import { Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogListStyles from "../styles/components/bloglist.module.scss"
-import Img from "gatsby-image"
+import { useSearch } from "./hooks/useSearch"
+// import Img from "gatsby-image"
 
-export default function BlogList(props) {
+export default function BlogList() {
   const blogData = useBlogData()
+  const { searchText, searchTags } = useSearch()
   function renderBlogData() {
     return (
       <div>
         {blogData
-          .filter(
-            (blog) =>
+          .filter((blog) => {
+            return (
               blog.node.frontmatter.title !== "" &&
-              blog.node.frontmatter.title.includes(props.keyword)
-          )
+              blog.node.frontmatter.title.includes(searchText) &&
+              blog.node.frontmatter.Instructor !== "" &&
+              (searchTags["Professor"] === undefined ||
+                searchTags["Professor"].some((Professor) =>
+                  blog.node.frontmatter.Instructor.includes(Professor)
+                ))
+            )
+          })
           .map((blog) => {
             return (
               <Link to={`/blog/${blog.node.id}`} key={blog.node.id}>

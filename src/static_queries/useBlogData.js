@@ -11,8 +11,11 @@ export default function useBlogData() {
               Date(formatString: "MMMM Do, YYYY")
               Author
               title
-              Files___media{
-                file{
+              Instructor
+              Semester
+              CourseTitle
+              Files___media {
+                file {
                   url
                 }
               }
