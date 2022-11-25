@@ -10,10 +10,9 @@ export default function useBlogData() {
             frontmatter {
               Date(formatString: "MMMM Do, YYYY")
               Instructor
-              Author
-              title
-              Star
               Semester
+              CourseTitle
+              Star
               CourseType
               Credits
               Files___media{
