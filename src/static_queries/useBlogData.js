@@ -16,8 +16,8 @@ export default function useBlogData() {
               Instructor
               Semester
               CourseTitle
-              Files___media{
-                file{
+              Files___media {
+                file {
                   url
                 }
               }
