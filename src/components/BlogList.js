@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogListStyles from "../styles/components/bloglist.module.scss"
@@ -8,22 +8,56 @@ import { useSearch } from "./hooks/useSearch"
 export default function BlogList() {
   const blogData = useBlogData()
   const { searchText, searchTags } = useSearch()
-  function renderBlogData() {
+  const [blogs, setBlogs] = useState([])
+  // const [person, setPerson] = useState([])
+
+  const updateBlogs = () => {
+    // console.log("fliter start")
+    const newblogs = blogData.filter((blog) => {
+      // console.log(blog.node.frontmatter.CourseTitle === null, i)
+      return (
+        // blog.node.frontmatter.title !== "" &&
+        blog.node.frontmatter.title.includes(searchText) &&
+        blog.node.frontmatter.Professor !== null &&
+        (searchTags.Professor === undefined ||
+          searchTags.Professor.length === 0 ||
+          searchTags["Professor"].some((Professor) =>
+            blog.node.frontmatter.Instructor.includes(Professor)
+          )) &&
+        blog.node.frontmatter.CourseTitle !== null &&
+        (searchTags.Course === undefined ||
+          searchTags.Course.length === 0 ||
+          searchTags["Course"].some((Course) =>
+            blog.node.frontmatter.CourseTitle.includes(Course)
+          )) &&
+        blog.node.frontmatter.Semester !== null &&
+        (searchTags.Semester === undefined ||
+          searchTags.Semester.length === 0 ||
+          searchTags["Semester"].some((Semester) =>
+            blog.node.frontmatter.Semester.includes(Semester)
+          ))
+      )
+    })
+    setBlogs(newblogs)
+  }
+
+  useEffect(() => {
+    // console.log("useEffect")
+    updateBlogs()
+    // console.log(searchTags)
+    // setPerson({ ...person, doo: ["dpoo"] })
+  }, [searchText, searchTags])
+  // useEffect(() => {
+  //   console.log("useEffect Person", person)
+  // }, [person])
+
+  const renderBlogData = () => {
     return (
       <div>
-        {blogData
-          .filter((blog) => {
-            return (
-              blog.node.frontmatter.title !== "" &&
-              blog.node.frontmatter.title.includes(searchText) &&
-              blog.node.frontmatter.Instructor !== "" &&
-              (searchTags["Professor"] === undefined ||
-                searchTags["Professor"].some((Professor) =>
-                  blog.node.frontmatter.Instructor.includes(Professor)
-                ))
-            )
-          })
-          .map((blog) => {
+        {blogs === [] ? (
+          <></>
+        ) : (
+          blogs.map((blog) => {
             return (
               <Link to={`/blog/${blog.node.id}`} key={blog.node.id}>
                 <li className={blogListStyles.li} key={blog.node.id}>
@@ -44,7 +78,8 @@ export default function BlogList() {
                 </li>
               </Link>
             )
-          })}
+          })
+        )}
       </div>
     )
   }

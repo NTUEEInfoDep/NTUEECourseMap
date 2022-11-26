@@ -13,17 +13,18 @@ const SearchProvider = (props) => {
 
   const updateSearchText = (msg) => {
     setSearchText(msg)
+    // console.log("hooks text")
   }
-  const updateSearchTags = (type, msg) => {
-    let newSearchTags = searchTags
-    switch (type) {
+  const updateSearchTags = (types, msg) => {
+    switch (types) {
       case "Clear":
-        newSearchTags = {}
+        setSearchTags({})
         break
       default:
-        newSearchTags[type] = msg
+        setSearchTags({ ...searchTags, [types]: msg })
     }
-    setSearchTags(newSearchTags)
+    // console.log("hooks tags")
+    // console.log(newSearchTags)
   }
   return (
     <SearchContext.Provider
