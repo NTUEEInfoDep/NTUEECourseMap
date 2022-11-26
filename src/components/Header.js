@@ -4,7 +4,7 @@ import * as headerStyles from "../styles/components/header.module.scss"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 function showTitle(page, siteName) {
-  if (page === "home")
+  if (page === "home" || page === "info")
     return (<h1>{siteName}</h1>)
   else
     return (<h1><ArrowBackIosIcon style={{position: 'relative', top: '2px'}}/>Back</h1>)

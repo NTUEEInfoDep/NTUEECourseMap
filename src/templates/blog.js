@@ -18,7 +18,7 @@ const MarkdownComponents = {
       const alt = metastring?.replace(/ *\{[^)]*\} */g, "")
       const hasCaption = metastring?.toLowerCase().includes("{caption:")
       const caption = metastring?.match(/{caption: (.*?)}/)?.pop()
-      console.log(image)
+      // console.log(image)
       return (
         <div>
           <img src={image.properties.src} alt={alt} />
@@ -54,6 +54,11 @@ export default function Blog(props) {
   const data = props.data.markdownRemark
   const allBlogData = useBlogData()
   const nextSlug = getNextSlug(data.id)
+
+  // console.log("hi");
+  // console.log(data.id);
+  // console.log(allBlogData);
+  // console.log(nextSlug); // contains address
 
   function getNextSlug(slug) {
     const allSlugs = allBlogData.map(blog => {
