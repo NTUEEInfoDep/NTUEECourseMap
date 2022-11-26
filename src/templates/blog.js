@@ -4,6 +4,9 @@ import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogTemplateStyles from "../styles/templates/blog.module.scss"
 import ReactMarkdown from "react-markdown"
+import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+
 
 const MarkdownComponents = {
   p: paragraph => {
@@ -25,6 +28,26 @@ const MarkdownComponents = {
     }
     return <p>{paragraph.children}</p>
   },
+}
+
+function showStars(n) {
+  return (<h3>{[1,2,3,4,5].map((i) => {
+    if(i <= n)
+      return (<StarRoundedIcon style={{margin: -2}} sx={{color: "#FFBF00"}}/>)
+    else
+      return (<StarBorderRoundedIcon style={{margin: -2}}/>)
+  })}</h3>)
+}
+
+function showSelectionMethod(n) {
+  if (n === '1')
+    return '（不限人數，直接上網加選）' 
+  else if (n === '2')
+    return '（向教師取得授權碼後加選）' 
+  else if (n === '3')
+    return '（有人數限制，上網登記後分發）' 
+  else
+    return '' 
 }
 
 export default function Blog(props) {
@@ -49,15 +72,52 @@ export default function Blog(props) {
       <article className={blogTemplateStyles.blog}>
         <div className={blogTemplateStyles.blog__info}>
           <h1>{data.frontmatter.title}</h1>
-          <h3>{data.frontmatter.Date}</h3>
+          <h3 className={blogTemplateStyles.semester}>{data.frontmatter.Semester}</h3>
+          {showStars(+data.frontmatter.Star)}
+          <br></br>
+
+          <table>
+            <tr>
+              <th>授課教師</th>
+              <td>{data.frontmatter.Instructor}</td>
+            </tr>
+            <tr>
+              <th>類型</th>
+              <td>{data.frontmatter.CourseType}</td>
+            </tr>
+            <tr>
+              <th>學分</th>
+              <td>{data.frontmatter.Credits}</td>
+            </tr>
+            <tr>
+              <th>系所</th>
+              <td>{data.frontmatter.Department}</td>
+            </tr>
+            <tr>
+              <th>加選方式</th>
+              <td>{data.frontmatter.SelectionMethod}{showSelectionMethod(data.frontmatter.SelectionMethod)}</td>
+            </tr>
+          </table>
+
+          <hr></hr>
+
+          <table>
+            <tr>
+              <th>撰文者</th>
+              <td>{data.frontmatter.Author}</td>
+            </tr>
+          </table>
+
         </div>
+
         <ReactMarkdown
           className={blogTemplateStyles.blog__body}
           components={MarkdownComponents}
           children={data.rawMarkdownBody}
         ></ReactMarkdown>
+
         <div className={blogTemplateStyles.blog__footer}>
-          <h2>Written By: {data.frontmatter.Author}</h2>
+          <h2>本文由 {data.frontmatter.Author} 撰寫</h2>
           <Link
             to={`blog/${nextSlug}`}
             className={blogTemplateStyles.footer__next}
@@ -88,6 +148,13 @@ export const getPostData = graphql`
         title
         Author
         Date(formatString: "MMMM Do, YYYY")
+        Instructor
+        CourseType
+        Credits
+        Department
+        SelectionMethod
+        Semester
+        Star
       }
       rawMarkdownBody
     }
