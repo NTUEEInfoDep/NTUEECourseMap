@@ -3,14 +3,14 @@ import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function showTitle(page, siteName) {
-  if (page === "home" || page === "info")
-    return (<h1>{siteName}</h1>)
-  else
-    return (<h1><ArrowBackIosIcon style={{position: 'relative', top: '2px'}}/>Back</h1>)
-}
-
 export default function Header(props) {
+  const showTitle = (page, siteName) => {
+    if (page === "home" || page === "info")
+      return (<h1>{siteName}</h1>)
+    else
+      return (<h1><ArrowBackIosIcon style={{position: 'relative', top: '2px'}}/>Back</h1>)
+  }
+
   return (
     <header
       className={`${headerStyles.header} ${
@@ -26,14 +26,12 @@ export default function Header(props) {
           {showTitle(props.page, props.title)}
         </Link>
         <div>
-          <h1>
-            <Link
-              to={props.page === "info" ? "/" : "/info"}
-              activeClassName={headerStyles.navItemActive}
-            >
-              {props.page === "info" ? "close" : "info"}
-            </Link>
-          </h1>
+          <Link
+            to={props.page === "info" ? "javascript:history.back()" : "/info"}
+            activeClassName={headerStyles.navItemActive}
+          >
+            <h1>{props.page === "info" ? "close" : "info"}</h1>
+          </Link>
         </div>
       </nav>
     </header>

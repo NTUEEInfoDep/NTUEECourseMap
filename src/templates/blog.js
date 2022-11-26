@@ -7,7 +7,6 @@ import ReactMarkdown from "react-markdown"
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
-
 const MarkdownComponents = {
   p: paragraph => {
     const { node } = paragraph
@@ -30,26 +29,6 @@ const MarkdownComponents = {
   },
 }
 
-function showStars(n) {
-  return (<h3>{[1,2,3,4,5].map((i) => {
-    if(i <= n)
-      return (<StarRoundedIcon style={{margin: -2}} sx={{color: "#FFBF00"}}/>)
-    else
-      return (<StarBorderRoundedIcon style={{margin: -2}}/>)
-  })}</h3>)
-}
-
-function showSelectionMethod(n) {
-  if (n === '1')
-    return '（不限人數，直接上網加選）' 
-  else if (n === '2')
-    return '（向教師取得授權碼後加選）' 
-  else if (n === '3')
-    return '（有人數限制，上網登記後分發）' 
-  else
-    return '' 
-}
-
 export default function Blog(props) {
   const data = props.data.markdownRemark
   const allBlogData = useBlogData()
@@ -59,6 +38,26 @@ export default function Blog(props) {
   // console.log(data.id);
   // console.log(allBlogData);
   // console.log(nextSlug); // contains address
+
+  const showStars = (n) => {
+    return (<h3>{[1,2,3,4,5].map((i) => {
+      if(i <= n)
+        return (<StarRoundedIcon style={{margin: -2}} sx={{color: "#FFBF00"}}/>)
+      else
+        return (<StarBorderRoundedIcon style={{margin: -2}}/>)
+    })}</h3>)
+  }
+  
+  const showSelectionMethod = (n) => {
+    if (n === '1')
+      return '（不限人數，直接上網加選）' 
+    else if (n === '2')
+      return '（向教師取得授權碼後加選）' 
+    else if (n === '3')
+      return '（有人數限制，上網登記後分發）' 
+    else
+      return '' 
+  }
 
   function getNextSlug(slug) {
     const allSlugs = allBlogData.map(blog => {
