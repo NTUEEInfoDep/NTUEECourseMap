@@ -1,6 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
 import * as headerStyles from "../styles/components/header.module.scss"
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+function showTitle(page, siteName) {
+  if (page === "home")
+    return (<h1>{siteName}</h1>)
+  else
+    return (<h1><ArrowBackIosIcon style={{position: 'relative', top: '2px'}}/>Back</h1>)
+}
 
 export default function Header(props) {
   return (
@@ -15,7 +23,7 @@ export default function Header(props) {
         aria-label="main navigation"
       >
         <Link to="/">
-          <h1>{props.title}</h1>
+          {showTitle(props.page, props.title)}
         </Link>
         <div>
           <h1>
