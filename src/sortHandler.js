@@ -50,26 +50,41 @@ function semesterHandler(a, b) {
   }
 }
 
-export default function sortHandler(sortValue, sortOrder, a, b) {
+function compareFunction(sortValue, sortOrder) {
   const order = sortOrder === "descending" ? -1 : 1
   switch (sortValue) {
     case "date":
-      return (
-        order * dateHandler(a.node.frontmatter.Date, b.node.frontmatter.Date)
-      )
-    case "score":
-      return order * (a.node.frontmatter.Star - b.node.frontmatter.Star)
-    case "semester":
-      return (
-        order *
-        semesterHandler(
-          a.node.frontmatter.Semester,
-          b.node.frontmatter.Semester
+      return (a, b) => {
+        return (
+          order * dateHandler(a.node.frontmatter.Date, b.node.frontmatter.Date)
         )
-      )
+      }
+    case "score":
+      return (a, b) => {
+        return order * a.node.frontmatter.Star - b.node.frontmatter.Star
+      }
+    case "semester":
+      return (a, b) => {
+        return (
+          order *
+          semesterHandler(
+            a.node.frontmatter.Semester,
+            b.node.frontmatter.Semester
+          )
+        )
+      }
     case "like":
-      return 0
+      return (_a, _b) => {
+        return 0
+      }
     default:
-      return 0
+      return (_a, _b) => {
+        return 0
+      }
   }
+}
+
+export default function sortHandler(sortValue, sortOrder, data) {
+  const compareType = compareFunction(sortValue, sortOrder)
+  return data.concat().sort(compareType)
 }
