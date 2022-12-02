@@ -84,8 +84,10 @@ const sortList = [
 export default function DrawerLeft(props) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
-  const [sortValue, setSortValue] = useState("date")
-  const [sortOrder, setSortOrder] = useState("ascending")
+  //const [sortValue, setSortValue] = useState("date")
+  //const [sortOrder, setSortOrder] = useState("ascending")
+  const { sortValue, updateSortValue } = useSearch()
+  const { sortOrder, updateSortOrder } = useSearch()
 
   const [localSearchText, setLocalSearchText] = useState("")
   const { searchText, updateSearchText } = useSearch()
@@ -229,9 +231,9 @@ export default function DrawerLeft(props) {
             <SortTool
               sortList={sortList}
               sortValue={sortValue}
-              setSortValue={setSortValue}
+              setSortValue={updateSortValue}
               sortOrder={sortOrder}
-              setSortOrder={setSortOrder}
+              setSortOrder={updateSortOrder}
             />
           </Box>
 

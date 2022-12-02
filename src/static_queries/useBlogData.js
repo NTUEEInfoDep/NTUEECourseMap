@@ -13,6 +13,7 @@ export default function useBlogData() {
               title
               Instructor
               Semester
+              Star
               CourseTitle
               Files___media {
                 file {

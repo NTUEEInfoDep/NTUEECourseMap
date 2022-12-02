@@ -4,6 +4,7 @@ import useBlogData from "../static_queries/useBlogData"
 import * as blogListStyles from "../styles/components/bloglist.module.scss"
 import { useSearch } from "./hooks/useSearch"
 import DefaultImage from "../../public/default.png"
+import sortHandler from "../sortHandler"
 // import Img from "gatsby-image"
 
 export default function BlogList() {
