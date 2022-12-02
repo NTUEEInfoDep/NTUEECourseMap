@@ -61,7 +61,7 @@ function compareFunction(sortValue, sortOrder) {
       }
     case "score":
       return (a, b) => {
-        return order * a.node.frontmatter.Star - b.node.frontmatter.Star
+        return order * (a.node.frontmatter.Star - b.node.frontmatter.Star)
       }
     case "semester":
       return (a, b) => {
