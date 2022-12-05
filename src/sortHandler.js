@@ -17,10 +17,11 @@ function dateToNumbers(dateString) {
   //date: "MMMM Do, YYYY"
   //output: [year, month, day]
   const temp = dateString.split(" ")
-  var result = [0, 0, 0]
-  result[0] = Number(result[2])
-  result[1] = month_name.indexOf(temp[0])
-  result[2] = Number(temp[1].substring(0, temp[1].length - 3))
+  const result = [
+    Number(temp[2]),
+    month_name.indexOf(temp[0]),
+    Number(temp[1].substring(0, temp[1].length - 3)),
+  ]
   return result
 }
 
