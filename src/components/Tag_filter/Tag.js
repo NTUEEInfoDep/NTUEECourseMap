@@ -5,6 +5,8 @@ import Paper from "@mui/material/Paper"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
 import * as tagStyles from "../../styles/components/tag.module.scss"
+import { useSearch } from "../hooks/useSearch"
+import { useEffect } from "react"
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -12,6 +14,10 @@ const ListItem = styled("li")(({ theme }) => ({
 
 export default function LimitTags(props) {
   const { name, data, tags, setTags } = props
+  const { searchTags, updateSearchTags } = useSearch()
+  // useEffect(() => {
+  //   console.log("useEffect Tags-component", searchTags)
+  // }, [searchTags])
   return (
     // 弄一個class做css
     <div>
@@ -43,6 +49,8 @@ export default function LimitTags(props) {
           // console.log(len)
           // console.log(value)
           setTags(value)
+          updateSearchTags(name, value)
+          // console.log("update finished")
         }}
       />
     </div>
