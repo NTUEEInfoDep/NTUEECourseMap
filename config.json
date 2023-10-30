@@ -1,5 +1,6 @@
 {
   "title": "NTUEE Course Map",
   "description": "A course map for NTUEE students.",
-  "repository_url": "https://github.com/NTUEEInfoDep/NTUEECourseMap"
+  "repository_url": "https://github.com/NTUEEInfoDep/NTUEECourseMap",
+  "node": "16.20.2"
 }

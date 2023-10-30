@@ -4,11 +4,11 @@ import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogTemplateStyles from "../styles/templates/blog.module.scss"
 import ReactMarkdown from "react-markdown"
-import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded"
+import StarRoundedIcon from "@mui/icons-material/StarRounded"
 
 const MarkdownComponents = {
-  p: paragraph => {
+  p: (paragraph) => {
     const { node } = paragraph
 
     if (node.children[0].tagName === "img") {
@@ -35,34 +35,37 @@ export default function Blog(props) {
   const nextSlug = getNextSlug(data.id)
 
   // console.log("hi");
-  // console.log(data.id);
+  // console.log(data.id)
   // console.log(allBlogData);
-  // console.log(nextSlug); // contains address
+  // console.log(nextSlug) // contains address
 
   const showStars = (n) => {
-    return (<h3>{[1,2,3,4,5].map((i) => {
-      if(i <= n)
-        return (<StarRoundedIcon style={{margin: -2}} sx={{color: "#FFBF00"}}/>)
-      else
-        return (<StarBorderRoundedIcon style={{margin: -2}}/>)
-    })}</h3>)
+    return (
+      <h3>
+        {[1, 2, 3, 4, 5].map((i) => {
+          if (i <= n)
+            return (
+              <StarRoundedIcon
+                style={{ margin: -2 }}
+                sx={{ color: "#FFBF00" }}
+              />
+            )
+          else return <StarBorderRoundedIcon style={{ margin: -2 }} />
+        })}
+      </h3>
+    )
   }
-  
+
   const showSelectionMethod = (n) => {
-    if (n === '1')
-      return '（不限人數，直接上網加選）' 
-    else if (n === '2')
-      return '（向教師取得授權碼後加選）' 
-    else if (n === '3')
-      return '（有人數限制，上網登記後分發）' 
-    else
-      return '' 
+    if (n === "1") return "（不限人數，直接上網加選）"
+    else if (n === "2") return "（向教師取得授權碼後加選）"
+    else if (n === "3") return "（有人數限制，上網登記後分發）"
+    else return ""
   }
 
   function getNextSlug(slug) {
-    const allSlugs = allBlogData.map(blog => {
-      return blog.node.id
-    })
+    console.log(slug)
+    const allSlugs = allBlogData.map((blog) => blog.node.id)
     const nextSlug = allSlugs[allSlugs.indexOf(slug) + 1]
     if (nextSlug !== undefined && nextSlug !== "") {
       return nextSlug
@@ -76,7 +79,9 @@ export default function Blog(props) {
       <article className={blogTemplateStyles.blog}>
         <div className={blogTemplateStyles.blog__info}>
           <h1>{data.frontmatter.title}</h1>
-          <h3 className={blogTemplateStyles.semester}>{data.frontmatter.Semester}</h3>
+          <h3 className={blogTemplateStyles.semester}>
+            {data.frontmatter.Semester}
+          </h3>
           {showStars(+data.frontmatter.Star)}
           <br></br>
 
@@ -99,7 +104,10 @@ export default function Blog(props) {
             </tr>
             <tr>
               <th>加選方式</th>
-              <td>{data.frontmatter.SelectionMethod}{showSelectionMethod(data.frontmatter.SelectionMethod)}</td>
+              <td>
+                {data.frontmatter.SelectionMethod}
+                {showSelectionMethod(data.frontmatter.SelectionMethod)}
+              </td>
             </tr>
           </table>
 
@@ -111,7 +119,6 @@ export default function Blog(props) {
               <td>{data.frontmatter.Author}</td>
             </tr>
           </table>
-
         </div>
 
         <ReactMarkdown
@@ -123,7 +130,7 @@ export default function Blog(props) {
         <div className={blogTemplateStyles.blog__footer}>
           <h2>本文由 {data.frontmatter.Author} 撰寫</h2>
           <Link
-            to={`blog/${nextSlug}`}
+            to={`/blog/${nextSlug}`}
             className={blogTemplateStyles.footer__next}
           >
             <svg
@@ -146,7 +153,7 @@ export default function Blog(props) {
 //dynamic page query, must occur within each post context
 //$slug is made available by context from createPages call in gatsby-node.js
 export const getPostData = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     markdownRemark(id: { eq: $slug }) {
       frontmatter {
         title
