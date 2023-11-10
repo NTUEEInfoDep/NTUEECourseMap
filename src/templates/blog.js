@@ -4,8 +4,7 @@ import { graphql, Link } from "gatsby"
 import useBlogData from "../static_queries/useBlogData"
 import * as blogTemplateStyles from "../styles/templates/blog.module.scss"
 import ReactMarkdown from "react-markdown"
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded"
-import StarRoundedIcon from "@mui/icons-material/StarRounded"
+import Stars from "../components/Stars"
 
 const MarkdownComponents = {
   p: (paragraph) => {
@@ -34,28 +33,6 @@ export default function Blog(props) {
   const allBlogData = useBlogData()
   const nextSlug = getNextSlug(data.id)
 
-  // console.log("hi");
-  // console.log(data.id)
-  // console.log(allBlogData);
-  // console.log(nextSlug) // contains address
-
-  const showStars = (n) => {
-    return (
-      <h3>
-        {[1, 2, 3, 4, 5].map((i) => {
-          if (i <= n)
-            return (
-              <StarRoundedIcon
-                style={{ margin: -2 }}
-                sx={{ color: "#FFBF00" }}
-              />
-            )
-          else return <StarBorderRoundedIcon style={{ margin: -2 }} />
-        })}
-      </h3>
-    )
-  }
-
   const showSelectionMethod = (n) => {
     if (n === "1") return "（不限人數，直接上網加選）"
     else if (n === "2") return "（向教師取得授權碼後加選）"
@@ -73,7 +50,7 @@ export default function Blog(props) {
       return allSlugs[0]
     }
   }
-
+  console.log(data)
   return (
     <Layout>
       <article className={blogTemplateStyles.blog}>
@@ -82,8 +59,8 @@ export default function Blog(props) {
           <h3 className={blogTemplateStyles.semester}>
             {data.frontmatter.Semester}
           </h3>
-          {showStars(+data.frontmatter.Star)}
-          <br></br>
+          <Stars starsNum={+data.frontmatter.Star} />
+          <br />
 
           <table>
             <tr>

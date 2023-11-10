@@ -32,3 +32,28 @@ With Gatsby offering a plugin-rich ecosystem, there are a few key plugins that m
 - `src/pages` is a very important and required directory for Gatsby. This is where all your pages for the site live.
 - Blog posts are built from a template that can be accessed at `src/templates`.
 - The pages & template are comprised of components from `src/components`.
+
+# Development
+
+1. use node v16.20.2
+```sh
+$ nvm install 16.20.2
+$ nvm use 16.20.2
+```
+2. install package
+
+```sh
+$ yarn install
+```
+
+3. build
+
+```sh
+$ yarn build
+```
+
+4. dev
+
+```sh
+$ yarn dev
+```
