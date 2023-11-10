@@ -9,6 +9,15 @@ import DefaultImage from "../../public/default.png"
 export default function BlogList() {
   const blogData = useBlogData()
   const { searchText, searchTags } = useSearch()
+
+  const CountingStars = (rating) => {
+    if (rating === '1'){return <h2>★☆☆☆☆</h2>}
+    else if (rating === '2'){return <h2>★★☆☆☆</h2>}
+    else if (rating === '3'){return <h2>★★★☆☆</h2>}
+    else if (rating === '4'){return <h2>★★★★☆</h2>}
+    else {return <h2>★★★★★</h2>}
+  }
+
   const [blogs, setBlogs] = useState([])
   // const [person, setPerson] = useState([])
 
@@ -73,10 +82,27 @@ export default function BlogList() {
                     />
                   </div>
                   <div className={blogListStyles.list__info}>
-                    <div className={blogListStyles.list__base}>
-                      <h2>{blog.node.frontmatter.title}</h2>
-                      <h3>{blog.node.frontmatter.Date}</h3>
-                      <p>{blog.node.excerpt}</p>
+                    <div className={blogListStyles.text}>
+                      <div className={blogListStyles.leftPart}>
+                        <div className={blogListStyles.flex__addtion}>
+                          <div className={blogListStyles.main__info}>
+                            <h2 className={blogListStyles.title}>{blog.node.frontmatter.Semester} {blog.node.frontmatter.title}</h2>
+                            <h3 className={blogListStyles.instructor}>{blog.node.frontmatter.Instructor}</h3>
+                          </div>
+                          <div className={blogListStyles.addtion}>
+                            <h3 className={blogListStyles.text__rightPart}>貼文日期 : {blog.node.frontmatter.Date}</h3>
+                            <h3 className={blogListStyles.text__addtion}>課程類型 : {blog.node.frontmatter.CourseType}</h3>
+                            <h3 className={blogListStyles.text__addtion}>學分數 : {blog.node.frontmatter.Credits}</h3>
+                          </div>
+                        </div>
+                        <p className={blogListStyles.detail}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aliquam culpa quod a molestias nobis maiores temp</p>
+                        <p>{blog.node.excerpt}</p>
+                      </div>
+                      <div className={blogListStyles.rightPart}>
+                        <h3 className={blogListStyles.text__rightPart}>{blog.node.frontmatter.Author}</h3>
+                        <br /><br /><br /><br />
+                        <div className={blogListStyles.star}>{CountingStars(blog.node.frontmatter.Star)}</div>
+                      </div>
                     </div>
                   </div>
                 </li>
