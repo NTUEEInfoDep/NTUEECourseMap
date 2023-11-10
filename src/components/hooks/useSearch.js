@@ -3,12 +3,18 @@ import React, { useState, useContext, createContext } from "react"
 const SearchContext = createContext({
   searchText: "",
   searchTags: {},
+  sortValue: "",
+  sortOrder: "",
   updateSearchText: () => {},
   updateSearchTags: () => {},
+  updateSortValue: () => {},
+  updateSortOrder: () => {},
 })
 const SearchProvider = (props) => {
   const [searchText, setSearchText] = useState("")
   const [searchTags, setSearchTags] = useState({})
+  const [sortValue, setSortValue] = useState("date")
+  const [sortOrder, setSortOrder] = useState("ascending")
   // usage: {'Professor': ['Prof1', 'Prof2', ...], 'Course': [], 'Semester': []}
 
   const updateSearchText = (msg) => {
@@ -26,9 +32,24 @@ const SearchProvider = (props) => {
     // console.log("hooks tags")
     // console.log(newSearchTags)
   }
+  const updateSortValue = (value) => {
+    setSortValue(value)
+  }
+  const updateSortOrder = (order) => {
+    setSortOrder(order)
+  }
   return (
     <SearchContext.Provider
-      value={{ searchText, searchTags, updateSearchText, updateSearchTags }}
+      value={{
+        searchText,
+        searchTags,
+        sortValue,
+        sortOrder,
+        updateSearchText,
+        updateSearchTags,
+        updateSortValue,
+        updateSortOrder,
+      }}
       {...props}
     />
   )
