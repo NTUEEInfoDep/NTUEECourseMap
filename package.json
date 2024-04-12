@@ -1,0 +1,10 @@
+{
+  "name": "NTUEECourseMap",
+  "description": "NTUEE Course Map 2024",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "cd frontend && pnpm install && cd ../backend && pnpm install",
+    "backend": "cd backend && pnpm start"
+  }
+}
