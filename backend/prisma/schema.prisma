@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  name      String
+  studentID String    @unique
+  password  String    @unique
+  admin     Boolean   @default(false)
+  comments  Comment[]
+  likes     Like[]
+  dislikes  Dislike[]
+}
+
+model Course {
+  id              Int       @id @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  courseID        Int
+  courseTitle     String
+  instructor      String
+  courseType      String
+  credits         Int
+  department      String
+  selectionMethod String
+  semester        String
+  author          String    @default("EEvolution Admin")
+  picture         String
+  content         String
+  nextIDs         Int[]
+  prevIDs         Int[]
+  comments        Comment[]
+  groupID         Int
+  group           Group     @relation(fields: [groupID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Comment {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  commenterID Int
+  commenter   User      @relation(fields: [commenterID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  content     String
+  courseID    Int
+  course      Course    @relation(fields: [courseID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  likes       Like[]
+  dislikes    Dislike[]
+}
+
+model Group {
+  id      Int      @id @default(autoincrement())
+  name    String
+  content String
+  courses Course[]
+}
+
+model Like {
+  id        Int     @id @default(autoincrement())
+  userID    Int
+  user      User    @relation(fields: [userID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  commentID Int
+  comment   Comment @relation(fields: [commentID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Dislike {
+  id        Int     @id @default(autoincrement())
+  userID    Int
+  user      User    @relation(fields: [userID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  commentID Int
+  comment   Comment @relation(fields: [commentID], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
