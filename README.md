@@ -44,6 +44,10 @@ spin up database
 # NTUEECourseMap
 docker compose -f docker-compose.yml up -d
 ```
+and paste the following to `.env`
+```sh
+DATABASE_URL="postgresql://user:password@localhost:5432/NTUEECourseMap?schema=public"
+```
 
 setup: install dotenv-cli and ts-node globally
 
@@ -52,7 +56,7 @@ setup: install dotenv-cli and ts-node globally
 pnpm setup
 ```
 
-run prisma
+prisma generate and migrate
 
 ```sh
 # NTUEECourseMap/backend
