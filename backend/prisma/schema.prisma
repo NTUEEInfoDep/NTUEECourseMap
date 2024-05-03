@@ -14,15 +14,16 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  name      String
-  studentID String    @unique
-  password  String    @unique
-  admin     Boolean   @default(false)
-  comments  Comment[]
-  likes     Like[]
-  dislikes  Dislike[]
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime  @default(now())
+  name       String
+  studentID  String    @unique
+  password   String    @unique
+  admin      Boolean   @default(false)
+  comments   Comment[]
+  commentIDs Int[]
+  likes      Like[]
+  dislikes   Dislike[]
 }
 
 model Course {
@@ -59,10 +60,11 @@ model Comment {
 }
 
 model Group {
-  id      Int      @id @default(autoincrement())
-  name    String
-  content String
-  courses Course[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  content   String
+  courses   Course[]
+  courseIDs Int[]
 }
 
 model Like {
