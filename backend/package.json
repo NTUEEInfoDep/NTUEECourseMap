@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "setup": "pnpm install -g dotenv-cli ts-node",
+    "setup": "pnpm install -g dotenv-cli tsx",
     "generate": "npx prisma generate",
     "migrate": "dotenv -e .env -- npx prisma migrate dev --name init",
     "studio": "dotenv -e .env -- npx prisma studio",
-    "start": "dotenv -e .env -- ts-node-esm ./src/index.ts",
+    "start": "dotenv -e .env -- npx tsx ./src/index.ts",
     "format": "pnpm exec prettier . --write",
     "lint": "pnpm eslint ."
   },
