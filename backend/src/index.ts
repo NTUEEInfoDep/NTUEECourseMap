@@ -11,11 +11,11 @@ import { useServer } from "graphql-ws/lib/use/ws";
 
 import { typeDefs } from "./types/typeDefs.ts";
 import { Query } from "./resolvers/Query.ts";
-// import { Mutation } from "./resolvers/Mutation.ts";
+import { Mutation } from "./resolvers/Mutation.ts";
 // import { Subscription } from "./resolvers/Subscription.ts";
 
 const app = express();
-const resolvers = { Query };
+const resolvers = { Query, Mutation };
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const httpServer = http.createServer(app);

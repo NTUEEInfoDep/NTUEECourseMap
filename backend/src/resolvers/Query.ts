@@ -4,7 +4,7 @@ const Query = {
   AllGroups: async () => {
     const groups = await prisma.group.findMany({
       orderBy: {
-        id: "desc",
+        id: "asc",
       },
     });
     return groups;

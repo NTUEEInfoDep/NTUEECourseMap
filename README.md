@@ -69,14 +69,21 @@ pnpm generate
 pnpm migrate
 ```
 
-#### run the backend(default at `localhost:5000`)
+run the backend(default at `localhost:5000`)
 
 ```sh
 # NTUEECourseMap
 pnpm backend
 ```
 
-#### adminer at port 8080, or run
+init the database with pseudo data
+
+```sh
+# NTUEECourseMap/backend
+pnpm initData
+```
+
+open adminer at port 8080, or run
 
 ```sh
 # NTUEECourseMap/backend

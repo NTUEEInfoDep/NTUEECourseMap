@@ -11,12 +11,22 @@ const typeDefs = `#graphql
   }
 
   ### Define Resolvers ###
-
+  
+  input GroupInput {
+    name: String!
+    content: String!
+    courseIDs: [Int]
+  }
 
   type Query {
     AllGroups: [Group]   
   }
 
+  type Mutation {
+    CreateGroup(groupInput: GroupInput!): Group
+    UpdateGroup(id: Int!, groupInput: GroupInput!): Group
+    DeleteGroup(id: Int!): Group
+  }
 `;
 
 export { typeDefs };

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "setup": "pnpm install -g dotenv-cli tsx",
+    "setup": "npm install -g dotenv-cli tsx",
     "generate": "npx prisma generate",
     "migrate": "dotenv -e .env -- npx prisma migrate dev --name init",
     "studio": "dotenv -e .env -- npx prisma studio",
     "start": "dotenv -e .env -- npx tsx ./src/index.ts",
     "format": "pnpm exec prettier . --write",
-    "lint": "pnpm eslint ."
+    "lint": "pnpm eslint .",
+    "initData": "cd utils && dotenv -e ../.env -- npx tsx ./initDB.ts"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
